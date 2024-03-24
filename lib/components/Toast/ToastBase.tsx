@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { BsX } from "react-icons/bs";
 import { classMerge } from "../../utils/clsx";
 import "./Toast.css";
@@ -19,10 +19,16 @@ export default function ToastBase({
   setToasts,
 }: ToastBaseProps) {
   const Icon = getIcons(type, 30);
+  const toastRef = useRef<HTMLDivElement>(null);
 
   const removeToast = () => {
-    setToasts((prev) => prev.filter((item) => item.id !== id));
-    ToastInstance.remove(id);
+    if (toastRef.current) {
+      toastRef.current.classList.add("toastOut-right");
+    }
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((item) => item.id !== id));
+      ToastInstance.remove(id);
+    }, 250);
   };
 
   useEffect(() => {
@@ -35,6 +41,7 @@ export default function ToastBase({
   return (
     <div
       className={classMerge(defaultToast, colorOptions[type], "toast-right")}
+      ref={toastRef}
     >
       <div className="w-full flex flex-row px-2 py-3">
         <div className="w-fit flex justify-center items-start">{Icon}</div>

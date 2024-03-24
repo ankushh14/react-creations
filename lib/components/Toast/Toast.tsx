@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import { classMerge } from "../../utils/clsx";
 import ToastBase from "./ToastBase";
 import { defaultToastList, positionOptions } from "./constants";
@@ -9,15 +9,22 @@ const Toast = forwardRef<HTMLDivElement, Toaster>(
   ({ position = "top-right" }, ref) => {
     const [toasts, setToasts] = useState<ToastTypes[]>([]);
 
+    const getData = useCallback(
+      (data: ToastTypes[]) => {
+        if (position.includes("bottom")) {
+          setToasts(data);
+        } else {
+          setToasts(data.reverse());
+        }
+      },
+      [position]
+    );
+
     useEffect(() => {
-      ToastInstance.subscribe((data) => {
-        setToasts(data);
-      });
+      ToastInstance.subscribe(getData);
 
       return () => {
-        ToastInstance.unsubscribe((data) => {
-          setToasts(data);
-        });
+        ToastInstance.unsubscribe(getData);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

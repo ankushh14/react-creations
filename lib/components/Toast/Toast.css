@@ -2,6 +2,10 @@
   animation: toast-in-right 0.3s ease-in-out;
 }
 
+.toastOut-right {
+  animation: toast-out-right 0.3s ease-in-out;
+}
+
 .toast-left {
   animation: toast-in-left 0.3s ease-in-out;
 }
@@ -21,5 +25,23 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes toast-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes toast-out-left {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }

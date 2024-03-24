@@ -30,6 +30,7 @@ export const defaultToast = [
   "my-4",
   "transition-transform",
   "duration-700",
+  "overflow-hidden",
 ];
 
 export const defaultToastList = [
