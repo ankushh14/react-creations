@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { BsX } from "react-icons/bs";
 import { classMerge } from "../../utils/clsx";
-import "./Toast.css";
+import styles from "./Toast.module.css";
 import {
   additionalBarColor,
   colorOptions,
@@ -23,7 +23,7 @@ export default function ToastBase({
 
   const removeToast = () => {
     if (toastRef.current) {
-      toastRef.current.classList.add("toastOut-right");
+      toastRef.current.classList.add(styles["toastOut-right"]);
     }
     setTimeout(() => {
       setToasts((prev) => prev.filter((item) => item.id !== id));
@@ -40,7 +40,11 @@ export default function ToastBase({
 
   return (
     <div
-      className={classMerge(defaultToast, colorOptions[type], "toast-right")}
+      className={classMerge(
+        defaultToast,
+        colorOptions[type],
+        styles["toast-right"]
+      )}
       ref={toastRef}
     >
       <div className="w-full flex flex-row px-2 py-3">
