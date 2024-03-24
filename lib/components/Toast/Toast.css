@@ -1,0 +1,25 @@
+.toast-right {
+  animation: toast-in-right 0.3s ease-in-out;
+}
+
+.toast-left {
+  animation: toast-in-left 0.3s ease-in-out;
+}
+
+@keyframes toast-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

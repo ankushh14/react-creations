@@ -1,0 +1,36 @@
+.ripple-btn-effect {
+  overflow: hidden;
+  position: relative;
+}
+
+.ripple-btn-effect > .ripple {
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  background: #63a4ff53;
+  display: block;
+  content: "";
+  border-radius: 50%;
+  opacity: 1;
+  animation: ripple 1s ease forwards;
+}
+
+.ripple-btn-effect > .content {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(50);
+    opacity: 0.375;
+  }
+  100% {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
