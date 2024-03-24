@@ -1,6 +1,6 @@
 import { MouseEvent, forwardRef, useEffect, useState } from "react";
 import { classMerge } from "../../utils/clsx";
-import "./Button.css";
+import styles from "./Button.module.css";
 import {
   checkDisable,
   // colorOptions,
@@ -50,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           variantOptions[variant],
           sizeOptions[size],
           // colorOptions[shade],
-          "ripple-btn-effect",
+          styles["ripple-btn-effect"],
           className
         )}
         disabled={checkDisable(variant)}
@@ -62,7 +62,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isRippling ? (
           <span
-            className="ripple"
+            className={styles.ripple}
             style={{
               left: coords.x,
               top: coords.y,
@@ -71,7 +71,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           ""
         )}
-        <span className="content">{children}</span>
+        <span className={styles.content}>{children}</span>
       </button>
     );
   }
