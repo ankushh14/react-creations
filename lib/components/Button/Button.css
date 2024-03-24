@@ -11,8 +11,8 @@
   display: block;
   content: "";
   border-radius: 50%;
-  opacity: 1;
-  animation: ripple 1s ease forwards;
+  opacity: 0;
+  animation: ripple 0.5s ease forwards;
 }
 
 .ripple-btn-effect > .content {

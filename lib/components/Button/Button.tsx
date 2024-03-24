@@ -33,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         (variant === "solid" || variant === "outline")
       ) {
         setIsRippling(true);
-        setTimeout(() => setIsRippling(false), 300);
+        setTimeout(() => setIsRippling(false), 500);
       } else setIsRippling(false);
     }, [coords, variant]);
 
