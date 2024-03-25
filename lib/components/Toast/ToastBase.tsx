@@ -28,6 +28,10 @@ export default function ToastBase({
         toastRef.current.classList.add(styles["toastOut-left"]);
       } else if (position === "center") {
         toastRef.current.classList.add(styles["toast-center-out"]);
+      } else if (position === "bottom-center") {
+        toastRef.current.classList.add(styles["toastOut-up"]);
+      } else if (position === "top-center") {
+        toastRef.current.classList.add(styles["toastOut-down"]);
       } else {
         toastRef.current.classList.add(styles["toastOut-right"]);
       }
@@ -50,8 +54,10 @@ export default function ToastBase({
       className={classMerge(
         defaultToast,
         colorOptions[type],
-        `${position.includes("left") && position !== "center" ? styles["toast-left"] : styles["toast-right"]}`,
-        `${position === "center" && styles["toast-center"]}`
+        `${position.includes("left") && position !== "center" && position !== "top-center" && position !== "bottom-center" ? styles["toast-left"] : styles["toast-right"]}`,
+        `${position === "center" && styles["toast-center"]}`,
+        `${position === "top-center" && styles["toast-down"]}`,
+        `${position === "bottom-center" && styles["toast-up"]}`
       )}
       ref={toastRef}
     >
