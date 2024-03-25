@@ -15,20 +15,20 @@ export type Toaster = {
 
 export type ToastTypes = {
   id: number;
-  type: "success" | "information" | "warning" | "error";
+  type: "success" | "information" | "warning" | "error" | "plain" | "contrast";
   content: string;
   duration: number;
 };
 
 export type ToastFunctionProps = {
-  type: "success" | "information" | "warning" | "error";
+  type: "success" | "information" | "warning" | "error" | "plain" | "contrast";
   content: string;
   duration: number;
 };
 
 export type ToastBaseProps = {
   id: number;
-  type: "success" | "information" | "warning" | "error";
+  type: "success" | "information" | "warning" | "error" | "plain" | "contrast";
   content: string;
   duration: number;
   setToasts: React.Dispatch<React.SetStateAction<ToastTypes[]>>;

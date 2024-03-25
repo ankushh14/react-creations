@@ -62,8 +62,12 @@ export default function ToastBase({
       ref={toastRef}
     >
       <div className="w-full flex flex-row px-2 py-3">
-        <div className="w-fit flex justify-center items-start">{Icon}</div>
-        <div className="w-full px-2 text-center">{content}</div>
+        {type !== "plain" && type !== "contrast" && (
+          <div className="w-fit flex justify-center items-start">{Icon}</div>
+        )}
+        <div className="w-full px-2 text-center whitespace-pre-wrap break-words">
+          {content}
+        </div>
         <div
           className="w-fit flex justify-center items-start"
           onClick={removeToast}

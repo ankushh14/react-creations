@@ -61,6 +61,8 @@ export const colorOptions = {
   information: "bg-blue-100 text-blue-500",
   warning: "bg-orange-100 text-orange-500",
   error: "bg-red-100 text-red-500",
+  plain: "bg-white text-black",
+  contrast: "bg-[#121212] text-white",
 };
 
 export const additionalBarColor = {
@@ -68,4 +70,6 @@ export const additionalBarColor = {
   information: "bg-blue-500",
   warning: "bg-orange-500",
   error: "bg-red-500",
+  plain: "bg-[#121212]",
+  contrast: "bg-white",
 };
