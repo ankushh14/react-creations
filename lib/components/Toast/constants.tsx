@@ -8,12 +8,12 @@ import {
 export const positionOptions = {
   "top-left": "top-1 left-1",
   "top-right": "top-1 right-1",
-  "top-center": "top-1 -translate-x-1/2",
-  center: "-translate-x-1/2 -translate-y-1/2",
-  "left-center": "left-1 -translate-y-1/2",
-  "right-center": "right-1 -translate-y-1/2",
+  "top-center": "top-1 left-1/2 -translate-x-1/2",
+  center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+  "left-center": "left-1 top-1/2 -translate-y-1/2",
+  "right-center": "right-1 top-1/2 -translate-y-1/2",
   "bottom-left": "left-1 bottom-1",
-  "bottom-center": "bottom-1",
+  "bottom-center": "bottom-1 left-1/2 -translate-x-1/2",
   "bottom-right": "bottom-1 right-1",
 };
 
