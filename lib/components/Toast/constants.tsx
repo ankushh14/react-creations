@@ -40,7 +40,7 @@ export const defaultToastList = [
   "max-h-screen",
   "overflow-hidden",
   "fixed",
-  "z-[1000]",
+  "z-[9999999999]",
   "pointer-events-auto",
 ];
 

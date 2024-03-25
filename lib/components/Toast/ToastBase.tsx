@@ -17,13 +17,18 @@ export default function ToastBase({
   duration,
   id,
   setToasts,
+  position = "top-right",
 }: ToastBaseProps) {
   const Icon = getIcons(type, 30);
   const toastRef = useRef<HTMLDivElement>(null);
 
   const removeToast = () => {
     if (toastRef.current) {
-      toastRef.current.classList.add(styles["toastOut-right"]);
+      if (position.includes("left")) {
+        toastRef.current.classList.add(styles["toastOut-left"]);
+      } else {
+        toastRef.current.classList.add(styles["toastOut-right"]);
+      }
     }
     setTimeout(() => {
       setToasts((prev) => prev.filter((item) => item.id !== id));
@@ -43,7 +48,7 @@ export default function ToastBase({
       className={classMerge(
         defaultToast,
         colorOptions[type],
-        styles["toast-right"]
+        `${position.includes("left") ? styles["toast-left"] : styles["toast-right"]}`
       )}
       ref={toastRef}
     >
@@ -60,8 +65,12 @@ export default function ToastBase({
       <div
         className={classMerge(
           "w-full rounded-t-lg py-[0.15rem]",
-          additionalBarColor[type]
+          additionalBarColor[type],
+          styles["toast-load"]
         )}
+        style={{
+          animationDuration: `${duration}ms`,
+        }}
       ></div>
     </div>
   );

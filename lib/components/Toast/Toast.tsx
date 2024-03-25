@@ -44,6 +44,7 @@ const Toast = forwardRef<HTMLDivElement, Toaster>(
                 type={value.type}
                 id={value.id}
                 setToasts={setToasts}
+                position={position}
               />
             );
           })}

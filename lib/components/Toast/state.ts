@@ -1,5 +1,5 @@
 import { generateID } from "../../utils/genRandomId";
-import { ToastTypes } from "./types";
+import { ToastFunctionProps, ToastTypes } from "./types";
 
 class ToastObservable {
   subscribers: Array<(toast: ToastTypes[]) => void>;
@@ -33,12 +33,12 @@ const defaultDuration = 3000;
 export const ToastInstance = new ToastObservable();
 
 const toast = ({
-  id = generateID(),
   duration = defaultDuration,
   type = defaultType,
   content,
-}: ToastTypes) => {
-  ToastInstance.notify({ id, duration, type, content });
+}: ToastFunctionProps) => {
+  const ID = generateID();
+  ToastInstance.notify({ id: ID, duration, type, content });
 };
 
 export { toast };
