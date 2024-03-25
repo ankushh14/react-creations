@@ -26,6 +26,8 @@ export default function ToastBase({
     if (toastRef.current) {
       if (position.includes("left")) {
         toastRef.current.classList.add(styles["toastOut-left"]);
+      } else if (position === "center") {
+        toastRef.current.classList.add(styles["toast-center-out"]);
       } else {
         toastRef.current.classList.add(styles["toastOut-right"]);
       }
@@ -48,7 +50,8 @@ export default function ToastBase({
       className={classMerge(
         defaultToast,
         colorOptions[type],
-        `${position.includes("left") ? styles["toast-left"] : styles["toast-right"]}`
+        `${position.includes("left") && position !== "center" ? styles["toast-left"] : styles["toast-right"]}`,
+        `${position === "center" && styles["toast-center"]}`
       )}
       ref={toastRef}
     >
