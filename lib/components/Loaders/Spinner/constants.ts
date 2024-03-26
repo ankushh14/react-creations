@@ -2,7 +2,6 @@ export const defaultSpinnerStyles = [
   "bg-transparent",
   "rounded-full",
   "animate-spin",
-  "border-t-2",
   "border-blue-500",
 ];
 
@@ -15,4 +14,9 @@ export const sizeOptions = {
   lg: "w-16 h-16",
   xl: "w-20 h-20",
   custom: "min-w-2 w-full aspect-square",
+};
+
+export const borderOptions = {
+  xs: "border-t border-l",
+  sm: "border-t-2 border-l-2",
 };
