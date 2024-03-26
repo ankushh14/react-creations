@@ -1,30 +1,34 @@
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
+import { glob } from "glob";
+import { extname, relative, resolve } from "path";
 import tailwindcss from "tailwindcss";
+import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, "./lib/index.ts"),
-      name: "react-creations",
-      fileName: (format) => `index.${format}.js`,
+      entry: resolve(__dirname, "lib/index.ts"),
+      formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom", "tailwindcss"],
+      external: ["react", "react/jsx-runtime"],
+      input: Object.fromEntries(
+        glob
+          .sync("lib/**/*.{ts,tsx}")
+          .map((file) => [
+            relative("lib", file.slice(0, file.length - extname(file).length)),
+            fileURLToPath(new URL(file, import.meta.url)),
+          ])
+      ),
       output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          tailwindcss: "tailwindcss",
-        },
+        assetFileNames: "assets/[name][extname]",
+        entryFileNames: "[name].js",
       },
     },
-    sourcemap: true,
-    emptyOutDir: true,
   },
   plugins: [react(), dts({ rollupTypes: true }), libInjectCss()],
   css: {
