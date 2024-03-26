@@ -1,4 +1,4 @@
-export const containerdiv = ["w-full", "flex", "items-center"];
+export const containerdiv = ["min-w-[310px]", "w-full", "flex", "items-center"];
 
 export const defaultProgressBg = [
   "w-full",

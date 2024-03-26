@@ -14,12 +14,32 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Solid: Story = {
+export const DeterminateWithLabel: Story = {
   args: {
     value: 0,
     label: true,
-    color: "#FF0000",
-    bgColor: "#a48686",
+    color: "#4ca2f8",
+    bgColor: "#d1b8b8",
     variant: "determinate",
+  },
+};
+
+export const DeterminateWithoutLabel: Story = {
+  args: {
+    value: 0,
+    label: false,
+    color: "#4ca2f8",
+    bgColor: "#d1b8b8",
+    variant: "determinate",
+  },
+};
+
+export const Indeterminate: Story = {
+  args: {
+    value: 0,
+    label: false,
+    color: "#4ca2f8",
+    bgColor: "#d1b8b8",
+    variant: "indeterminate",
   },
 };
