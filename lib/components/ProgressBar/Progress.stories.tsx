@@ -19,5 +19,7 @@ export const Solid: Story = {
     value: 0,
     label: true,
     color: "#FF0000",
+    bgColor: "#a48686",
+    variant: "determinate",
   },
 };

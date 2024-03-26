@@ -5,7 +5,18 @@ import { containerdiv, defaultProgress, defaultProgressBg } from "./constants";
 import { ProgressBarProps } from "./types";
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ bgColor, color, label, value, variant, className, ...args }, ref) => {
+  (
+    {
+      bgColor,
+      color,
+      label = true,
+      value = 50,
+      variant = "determinate",
+      className,
+      ...args
+    },
+    ref
+  ) => {
     return (
       <div className={classMerge(containerdiv, className)} ref={ref} {...args}>
         <div
@@ -32,7 +43,9 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           )}
         </div>
         {label && variant !== "indeterminate" && (
-          <div className="font-semibold text-xs w-7 text-inherit">{value}%</div>
+          <div className="font-semibold text-xs w-7 text-inherit">
+            {value < 0 ? 0 : value > 100 ? 100 : value}%
+          </div>
         )}
       </div>
     );
