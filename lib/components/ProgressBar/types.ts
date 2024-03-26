@@ -1,3 +1,5 @@
+import { ComponentPropsWithRef } from "react";
+
 type variant = "determinate" | "indeterminate";
 
 export type ProgressBarTypes = {
@@ -7,3 +9,5 @@ export type ProgressBarTypes = {
   variant: variant;
   label: boolean;
 };
+
+export type ProgressBarProps = ComponentPropsWithRef<"div"> & ProgressBarTypes;
