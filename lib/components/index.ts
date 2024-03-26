@@ -1,5 +1,9 @@
 import Button from "./Button";
-import ProgressBar from "./ProgressBar";
-import { toast, Toast } from "./Toast";
 
-export { Button, ProgressBar, Toast, toast };
+export { Button };
+
+import ProgressBar from "./ProgressBar";
+
+export { ProgressBar };
+
+export { Toast, toast } from "./Toast";
