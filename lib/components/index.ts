@@ -8,6 +8,4 @@ export { ProgressBar };
 
 export { Toast, toast } from "./Toast";
 
-import { Spinner } from "./Loaders";
-
-export { Spinner };
+export * from "./Loaders";
