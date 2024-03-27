@@ -3,7 +3,7 @@ import { DefaultContentProps, DefaultHeaderProps } from "./types";
 
 export const DefaultHeader = ({ onHide }: DefaultHeaderProps) => {
   return (
-    <div className="w-full p-1 flex justify-end items-center">
+    <div className="w-full p-2 flex justify-end items-center">
       <div className="w-fit" onClick={onHide}>
         <CloseIcon />
       </div>
@@ -13,12 +13,12 @@ export const DefaultHeader = ({ onHide }: DefaultHeaderProps) => {
 
 export const DefaultContent = ({ content }: DefaultContentProps) => {
   return (
-    <div className="w-full">
+    <div className="w-full py-2 px-3">
       <p className="w-full whitespace-pre-wrap break-words">{content}</p>
     </div>
   );
 };
 
 export const DefaultFooter = () => {
-  return <div className="w-full flex p-1"></div>;
+  return <div className="w-full flex p-2"></div>;
 };
