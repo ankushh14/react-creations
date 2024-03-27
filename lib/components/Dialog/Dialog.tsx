@@ -15,6 +15,8 @@ const Dialog = ({
   Footer = null,
   Header = null,
   onHide = () => {},
+  headless = false,
+  CustomUI = null,
 }: DialogProps) => {
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
@@ -34,8 +36,17 @@ const Dialog = ({
     }
   };
 
+  const createCustomUI = () => {
+    if (CustomUI) {
+      return CustomUI;
+    } else {
+      return () => <></>;
+    }
+  };
+
   const CustomHeader = createHeader();
   const CustomFooter = createFooter();
+  const UserUI = createCustomUI();
 
   const closeDialog = () => {
     if (dialogRef) {
@@ -54,9 +65,15 @@ const Dialog = ({
           className={classMerge(defaultDialogStyles, styles["dialog-in"])}
           ref={dialogRef}
         >
-          <CustomHeader onHide={closeDialog} />
-          <DefaultContent content={content} />
-          <CustomFooter />
+          {headless ? (
+            <UserUI />
+          ) : (
+            <div className="max-w-[600px]">
+              <CustomHeader onHide={closeDialog} />
+              <DefaultContent content={content} />
+              <CustomFooter />
+            </div>
+          )}
         </div>
       </div>
     )
