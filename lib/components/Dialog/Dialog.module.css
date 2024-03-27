@@ -1,10 +1,10 @@
 .dialog-in {
   transform: scale(0);
-  animation: dialog-pop-in 0.3s ease-in-out forwards;
+  animation: dialog-pop-in 0.2s ease-in-out forwards;
 }
 
 .dialog-out {
-  animation: dialog-pop-out 0.3s ease-in-out forwards;
+  animation: dialog-pop-out 0.2s ease-in-out forwards;
 }
 
 @keyframes dialog-pop-in {
