@@ -2,7 +2,7 @@ import React from "react";
 
 export type DialogProps = {
   visible: boolean;
-  content: string;
+  content: React.ReactNode;
   Header: React.ComponentType | null;
   Footer: React.ComponentType | null;
   headless: boolean;
@@ -11,7 +11,7 @@ export type DialogProps = {
 };
 
 export type DefaultContentProps = {
-  content: string;
+  content: React.ReactNode;
 };
 
 export type DefaultHeaderProps = {
