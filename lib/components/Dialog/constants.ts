@@ -8,12 +8,12 @@ export const defaultContainerStyles = [
   "flex",
   "justify-center",
   "items-center",
+  "z-[9999]",
+  "p-2",
 ];
 
 export const defaultDialogStyles = [
-  "w-full",
-  "max-w-[500px]",
-  "p-3",
+  "w-fit",
   "flex",
   "flex-col",
   "bg-white",
@@ -22,4 +22,4 @@ export const defaultDialogStyles = [
 ];
 
 export const defaultContentPara =
-  "Here goes your content,Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum impedit reiciendis quaerat perferendis, repudiandae expedita asperiores voluptates dignissimos ullam? Laudantium adipisci modi quas, explicabo cupiditate dolorum inventore esse voluptas veniam?";
+  "Here goes your content, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum impedit reiciendis quaerat perferendis, repudiandae expedita";
