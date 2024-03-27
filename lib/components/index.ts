@@ -9,3 +9,7 @@ export { ProgressBar };
 export { Toast, toast } from "./Toast";
 
 export * from "./Loaders";
+
+import Dialog from "./Dialog";
+
+export { Dialog };

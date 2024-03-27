@@ -1,0 +1,26 @@
+.dialog-in {
+  transform: scale(0);
+  animation: dialog-pop-in 0.3s ease-in-out forwards;
+}
+
+.dialog-out {
+  animation: dialog-pop-out 0.3s ease-in-out forwards;
+}
+
+@keyframes dialog-pop-in {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog-pop-out {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
