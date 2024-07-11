@@ -58,12 +58,24 @@ const Dialog = ({
     }, 300);
   };
 
+  const handleBackgroundClick = () => {
+    closeDialog();
+  };
+
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     visible && (
-      <div className={classMerge(defaultContainerStyles)}>
+      <div
+        className={classMerge(defaultContainerStyles)}
+        onClick={handleBackgroundClick}
+      >
         <div
           className={classMerge(defaultDialogStyles, styles["dialog-in"])}
           ref={dialogRef}
+          onClick={handleModalClick}
         >
           {headless ? (
             <UserUI />
