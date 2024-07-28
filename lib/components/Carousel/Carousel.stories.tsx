@@ -18,5 +18,6 @@ export const Basic: Story = {
   args: {
     autoChange: false,
     changeIntervalInMilli: 2000,
+    orderedPages: true,
   },
 };

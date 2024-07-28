@@ -17,28 +17,27 @@ export function defaultTemplate(item): React.ReactNode {
 
 export const defaultValues = [
   {
-    id: "nasdkjnds",
     title: "This is first element",
     description: "Hey first element",
   },
   {
-    id: "asdasdacdas",
     title: "This is second element",
     description: "Hey second element",
   },
   {
-    id: "saddrffrfr",
     title: "This is third element",
     description: "Hey third element",
   },
   {
-    id: "saddrffrfr",
     title: "This is Fourth element",
     description: "Hey third element",
   },
   {
-    id: "saddrffrfr",
     title: "This is Fifth element",
+    description: "Hey third element",
+  },
+  {
+    title: "This is Sixth element",
     description: "Hey third element",
   },
 ];

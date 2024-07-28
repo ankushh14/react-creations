@@ -1,4 +1,9 @@
-import { ComponentProps, FunctionComponent } from "react";
+import {
+  ComponentProps,
+  Dispatch,
+  FunctionComponent,
+  SetStateAction,
+} from "react";
 
 type CustomProps = {
   autoChange?: boolean;
@@ -6,12 +11,19 @@ type CustomProps = {
   numOfVisible?: number;
   value: object[];
   changeIntervalInMilli: number;
+  orderedPages: boolean;
 };
 
 export type CarouselItemProps = {
   template: FunctionComponent;
   item: object;
   itemId: string;
+};
+
+export type IndicatorProps = {
+  index: number;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
 };
 
 export type CarouselProps = ComponentProps<"div"> & CustomProps;
