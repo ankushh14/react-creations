@@ -1,11 +1,17 @@
 import React from "react";
 import { generateRandomUUID } from "../../utils/genRandomId";
+import styles from "./Carousel.module.css";
 import { defaultTemplate, defaultValues } from "./constants";
 import { CarouselItemProps, CarouselProps, IndicatorProps } from "./types";
 
 const CarouselItem = React.memo<CarouselItemProps>(({ template, item }) => {
   const content = template(item);
-  return <div>{content}</div>;
+  const carouselRef = React.useRef<HTMLDivElement>(null);
+  return (
+    <div ref={carouselRef} className={styles["carousel-in-animation"]}>
+      {content}
+    </div>
+  );
 });
 
 const Carousel = React.memo(
@@ -18,6 +24,7 @@ const Carousel = React.memo(
         value = defaultValues,
         changeIntervalInMilli = 500,
         orderedPages = false,
+        orientation = "horizontal",
       },
       ref
     ) => {
@@ -86,19 +93,32 @@ const Carousel = React.memo(
       }, [noOfPages, value.length, numOfVisible]);
 
       return (
-        <div className="w-full flex flex-col shadow-sm shadow-gray-600">
-          <div ref={ref} className="w-full flex flex-row">
-            <button className="h-auto p-4 text-2xl" onClick={moveLeftHandle}>
-              {"<"}
+        <div className="w-full flex flex-col shadow-sm shadow-gray-600 overflow-hidden">
+          <div
+            ref={ref}
+            className={`w-full flex ${orientation === "horizontal" ? "flex-row" : "flex-col"}`}
+          >
+            <button
+              className="h-auto p-4 text-2xl text-blue-400"
+              onClick={moveLeftHandle}
+            >
+              {orientation === "horizontal" ? <>&#x21d0;</> : <>&#x21d1;</>}
             </button>
-            <div className="w-full flex flex-row justify-center items-center space-x-6 p-5">
+            <div
+              className={`w-full flex justify-center items-center p-5 ${orientation === "horizontal" ? "flex-row space-x-6" : "flex-col space-y-6"}`}
+            >
               {value.length && carouselItems}
             </div>
-            <button className="h-auto p-4 text-2xl" onClick={moveRightHandle}>
-              {">"}
+            <button
+              className="h-auto p-4 text-2xl text-blue-400"
+              onClick={moveRightHandle}
+            >
+              {orientation === "horizontal" ? <>&#x21d2;</> : <>&#x21d3;</>}
             </button>
           </div>
-          <div className="w-full flex flex-row justify-center items-center space-x-4 py-3">
+          <div
+            className={`w-full flex flex-row justify-center items-center space-x-4 py-3`}
+          >
             {Array.from({ length: noOfPages }).map((_, index) => {
               return orderedPages ? (
                 <OrderedPageIndicator
@@ -155,7 +175,7 @@ const OrderedPageIndicator = React.memo(
     return (
       <>
         <span
-          className={`w-fit bg-transparent hover:bg-[#87cefa3a] border border-[#80ccfba4] cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-[#80ccfb]" : "bg-transparent"}`}
+          className={`w-fit hover:bg-blue-200 border border-[#80ccfba4] cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-blue-200" : "bg-transparent"}`}
           onClick={onClickHandler}
         >
           {index}

@@ -12,6 +12,7 @@ type CustomProps = {
   value: object[];
   changeIntervalInMilli: number;
   orderedPages: boolean;
+  orientation: "horizontal" | "vertical";
 };
 
 export type CarouselItemProps = {
