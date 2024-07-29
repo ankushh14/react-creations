@@ -24,6 +24,8 @@ export type IndicatorProps = {
   index: number;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  setIndex: Dispatch<SetStateAction<number>>;
+  numOfVisible: number;
 };
 
 export type CarouselProps = ComponentProps<"div"> & CustomProps;

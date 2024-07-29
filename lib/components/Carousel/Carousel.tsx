@@ -5,9 +5,7 @@ import { CarouselItemProps, CarouselProps, IndicatorProps } from "./types";
 
 const CarouselItem = React.memo<CarouselItemProps>(({ template, item }) => {
   const content = template(item);
-  const carouselItemRef = React.useRef(null);
-
-  return <div ref={carouselItemRef}>{content}</div>;
+  return <div>{content}</div>;
 });
 
 const Carousel = React.memo(
@@ -108,6 +106,8 @@ const Carousel = React.memo(
                   index={index}
                   key={index}
                   setPage={setPage}
+                  setIndex={setIndex}
+                  numOfVisible={numOfVisible}
                 />
               ) : (
                 <UnorderedPageIndicator
@@ -115,6 +115,8 @@ const Carousel = React.memo(
                   index={index}
                   key={index}
                   setPage={setPage}
+                  setIndex={setIndex}
+                  numOfVisible={numOfVisible}
                 />
               );
             })}
@@ -125,36 +127,42 @@ const Carousel = React.memo(
   )
 );
 
-const UnorderedPageIndicator = ({ index, page, setPage }: IndicatorProps) => {
-  const onClickHandler = () => {
-    setPage(index);
-  };
+const UnorderedPageIndicator = React.memo(
+  ({ index, page, setPage, setIndex, numOfVisible }: IndicatorProps) => {
+    const onClickHandler = () => {
+      setIndex(index * numOfVisible);
+      setPage(index);
+    };
 
-  return (
-    <>
-      <span
-        className={`w-3 h-3 bg-transparent rounded-full cursor-pointer hover:border-blue-500 ${index === page ? "border-blue-500 border-4" : "border-slate-500 border"}`}
-        onClick={onClickHandler}
-      ></span>
-    </>
-  );
-};
+    return (
+      <>
+        <span
+          className={`w-3 h-3 bg-transparent rounded-full cursor-pointer hover:border-blue-500 ${index === page ? "border-blue-500 border-4" : "border-slate-500 border"}`}
+          onClick={onClickHandler}
+        ></span>
+      </>
+    );
+  }
+);
 
-const OrderedPageIndicator = ({ index, page, setPage }: IndicatorProps) => {
-  const onClickHandler = () => {
-    setPage(index);
-  };
+const OrderedPageIndicator = React.memo(
+  ({ index, page, setPage, setIndex, numOfVisible }: IndicatorProps) => {
+    const onClickHandler = () => {
+      setIndex(index * numOfVisible);
+      setPage(index);
+    };
 
-  return (
-    <>
-      <span
-        className={`w-fit bg-transparent hover:bg-[#87cefa3a] border border-[#80ccfba4] cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-[#80ccfba4]" : "bg-transparent"}`}
-        onClick={onClickHandler}
-      >
-        {index}
-      </span>
-    </>
-  );
-};
+    return (
+      <>
+        <span
+          className={`w-fit bg-transparent hover:bg-[#87cefa3a] border border-[#80ccfba4] cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-[#80ccfb]" : "bg-transparent"}`}
+          onClick={onClickHandler}
+        >
+          {index}
+        </span>
+      </>
+    );
+  }
+);
 
 export default Carousel;
