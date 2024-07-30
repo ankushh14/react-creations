@@ -1,6 +1,9 @@
 import Card from "../Card";
 
-export function defaultTemplate(item): React.ReactNode {
+export function defaultTemplate(item: {
+  title: string;
+  description: string;
+}): React.ReactNode {
   return (
     <Card
       width={300}

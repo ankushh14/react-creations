@@ -1,23 +1,19 @@
-import {
-  ComponentProps,
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-} from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ComponentProps, Dispatch, SetStateAction } from "react";
 
 type CustomProps = {
   autoChange?: boolean;
-  childTemplate: () => React.ReactNode;
+  childTemplate: (value: any) => React.ReactNode;
   numOfVisible?: number;
-  value: object[];
+  value: any[];
   changeIntervalInMilli: number;
   orderedPages: boolean;
   orientation: "horizontal" | "vertical";
 };
 
 export type CarouselItemProps = {
-  template: FunctionComponent;
-  item: object;
+  template: (value: any) => React.ReactNode;
+  item: any;
   itemId: string;
 };
 

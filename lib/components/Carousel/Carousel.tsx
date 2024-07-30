@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  IoIosArrowBack,
+  IoIosArrowDown,
+  IoIosArrowForward,
+  IoIosArrowUp,
+} from "react-icons/io";
 import { generateRandomUUID } from "../../utils/genRandomId";
 import styles from "./Carousel.module.css";
 import { defaultTemplate, defaultValues } from "./constants";
@@ -8,7 +14,13 @@ const CarouselItem = React.memo<CarouselItemProps>(({ template, item }) => {
   const content = template(item);
   const carouselRef = React.useRef<HTMLDivElement>(null);
   return (
-    <div ref={carouselRef} className={styles["carousel-in-animation"]}>
+    <div
+      ref={carouselRef}
+      className={styles["carousel-in-animation"]}
+      aria-atomic
+      role="group"
+      aria-current="true"
+    >
       {content}
     </div>
   );
@@ -25,6 +37,7 @@ const Carousel = React.memo(
         changeIntervalInMilli = 500,
         orderedPages = false,
         orientation = "horizontal",
+        ...args
       },
       ref
     ) => {
@@ -92,32 +105,66 @@ const Carousel = React.memo(
         }
       }, [noOfPages, value.length, numOfVisible]);
 
+      const onKeyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === "ArrowRight") {
+          moveRightHandle();
+        } else if (e.key === "ArrowLeft") {
+          moveLeftHandle();
+        } else {
+          return;
+        }
+      };
+
       return (
-        <div className="w-full flex flex-col shadow-sm shadow-gray-600 overflow-hidden">
+        <div
+          className="w-full flex flex-col shadow-sm shadow-gray-600 overflow-hidden focus:outline-blue-300"
+          {...args}
+          role="region"
+          tabIndex={0}
+          onKeyDown={onKeyDownHandler}
+        >
           <div
             ref={ref}
             className={`w-full flex ${orientation === "horizontal" ? "flex-row" : "flex-col"}`}
+            onKeyDown={(e) => e.stopPropagation()}
           >
-            <button
-              className="h-auto p-4 text-2xl text-blue-400"
-              onClick={moveLeftHandle}
-            >
-              {orientation === "horizontal" ? <>&#x21d0;</> : <>&#x21d1;</>}
-            </button>
+            <div className="h-auto p-4 flex justify-center items-center">
+              <button
+                className="w-fit rounded-full p-1 text-2xl text-blue-400 focus:outline-blue-500 bg-blue-100"
+                onClick={moveLeftHandle}
+                aria-label="Previous slide"
+              >
+                {orientation === "horizontal" ? (
+                  <IoIosArrowBack />
+                ) : (
+                  <IoIosArrowUp />
+                )}
+              </button>
+            </div>
             <div
               className={`w-full flex justify-center items-center p-5 ${orientation === "horizontal" ? "flex-row space-x-6" : "flex-col space-y-6"}`}
+              aria-live={`${autoChange ? "polite" : "off"}`}
             >
               {value.length && carouselItems}
             </div>
-            <button
-              className="h-auto p-4 text-2xl text-blue-400"
-              onClick={moveRightHandle}
-            >
-              {orientation === "horizontal" ? <>&#x21d2;</> : <>&#x21d3;</>}
-            </button>
+            <div className="h-auto p-4 flex justify-center items-center">
+              <button
+                className="w-fit rounded-full p-1 text-2xl text-blue-400 focus:outline-blue-500 bg-blue-100"
+                onClick={moveRightHandle}
+                aria-label="Next slide"
+              >
+                {orientation === "horizontal" ? (
+                  <IoIosArrowForward />
+                ) : (
+                  <IoIosArrowDown />
+                )}
+              </button>
+            </div>
           </div>
           <div
             className={`w-full flex flex-row justify-center items-center space-x-4 py-3`}
+            role="tablist"
+            onKeyDown={(e) => e.stopPropagation()}
           >
             {Array.from({ length: noOfPages }).map((_, index) => {
               return orderedPages ? (
@@ -154,11 +201,22 @@ const UnorderedPageIndicator = React.memo(
       setPage(index);
     };
 
+    const onKeyDownHandler = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+      if (e.key === "Enter" || e.key === "Space") {
+        onClickHandler();
+      }
+    };
+
     return (
       <>
         <span
-          className={`w-3 h-3 bg-transparent rounded-full cursor-pointer hover:border-blue-500 ${index === page ? "border-blue-500 border-4" : "border-slate-500 border"}`}
+          className={`w-3 h-3 bg-transparent rounded-full cursor-pointer hover:border-blue-500 focus:outline-blue-500 ${index === page ? "border-blue-500 border-4" : "border-slate-500 border"}`}
           onClick={onClickHandler}
+          tabIndex={0}
+          role="button"
+          aria-label={`click to go to page ${index} in carousel`}
+          title={`page ${index}`}
+          onKeyDown={onKeyDownHandler}
         ></span>
       </>
     );
@@ -172,11 +230,22 @@ const OrderedPageIndicator = React.memo(
       setPage(index);
     };
 
+    const onKeyDownHandler = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+      if (e.key === "Enter" || e.key === "Space") {
+        onClickHandler();
+      }
+    };
+
     return (
       <>
         <span
-          className={`w-fit hover:bg-blue-200 border border-[#80ccfba4] cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-blue-200" : "bg-transparent"}`}
+          className={`w-fit hover:bg-blue-200 border border-[#80ccfba4] focus:outline-blue-500 cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-blue-200" : "bg-transparent"}`}
           onClick={onClickHandler}
+          tabIndex={0}
+          role="button"
+          aria-label={`click to go to page ${index} in carousel`}
+          title={`page ${index}`}
+          onKeyDown={onKeyDownHandler}
         >
           {index}
         </span>
