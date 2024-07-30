@@ -1,3 +1,4 @@
+import React from "react";
 import { classMerge } from "../../../utils/clsx";
 import {
   defaultBounceStyles,
@@ -6,7 +7,7 @@ import {
 } from "./constants";
 import { BounceProps } from "./types";
 
-export default function Bounce({ color, size = "base" }: BounceProps) {
+const Bounce = React.memo(({ color, size = "base" }: BounceProps) => {
   const commonStyles = {
     backgroundColor: color,
   };
@@ -35,4 +36,6 @@ export default function Bounce({ color, size = "base" }: BounceProps) {
       ></span>
     </div>
   );
-}
+});
+
+export default Bounce;

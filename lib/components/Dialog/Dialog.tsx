@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { classMerge } from "../../utils/clsx";
 import styles from "./Dialog.module.css";
 import { DefaultContent, DefaultFooter, DefaultHeader } from "./DialogBase";
@@ -9,87 +9,89 @@ import {
 } from "./constants";
 import { DialogProps } from "./types";
 
-const Dialog = ({
-  visible = false,
-  content = defaultContentPara,
-  Footer = null,
-  Header = null,
-  onHide = () => {},
-  headless = false,
-  CustomUI = null,
-}: DialogProps) => {
-  const dialogRef = useRef<HTMLDivElement | null>(null);
+const Dialog = memo(
+  ({
+    visible = false,
+    content = defaultContentPara,
+    Footer = null,
+    Header = null,
+    onHide = () => {},
+    headless = false,
+    CustomUI = null,
+  }: DialogProps) => {
+    const dialogRef = useRef<HTMLDivElement | null>(null);
 
-  const createHeader = () => {
-    if (Header) {
-      return Header;
-    } else {
-      return DefaultHeader;
-    }
-  };
+    const createHeader = () => {
+      if (Header) {
+        return Header;
+      } else {
+        return DefaultHeader;
+      }
+    };
 
-  const createFooter = () => {
-    if (Footer) {
-      return Footer;
-    } else {
-      return DefaultFooter;
-    }
-  };
+    const createFooter = () => {
+      if (Footer) {
+        return Footer;
+      } else {
+        return DefaultFooter;
+      }
+    };
 
-  const createCustomUI = () => {
-    if (CustomUI) {
-      return CustomUI;
-    } else {
-      return () => <></>;
-    }
-  };
+    const createCustomUI = () => {
+      if (CustomUI) {
+        return CustomUI;
+      } else {
+        return () => <></>;
+      }
+    };
 
-  const CustomHeader = createHeader();
-  const CustomFooter = createFooter();
-  const UserUI = createCustomUI();
+    const CustomHeader = createHeader();
+    const CustomFooter = createFooter();
+    const UserUI = createCustomUI();
 
-  const closeDialog = () => {
-    if (dialogRef) {
-      dialogRef.current?.classList.add(styles["dialog-out"]);
-    }
-    setTimeout(() => {
-      dialogRef.current?.classList.remove(styles["dialog-out"]);
-      onHide();
-    }, 300);
-  };
+    const closeDialog = () => {
+      if (dialogRef) {
+        dialogRef.current?.classList.add(styles["dialog-out"]);
+      }
+      setTimeout(() => {
+        dialogRef.current?.classList.remove(styles["dialog-out"]);
+        onHide();
+      }, 300);
+    };
 
-  const handleBackgroundClick = () => {
-    closeDialog();
-  };
+    const handleBackgroundClick = () => {
+      closeDialog();
+    };
 
-  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
+    const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+    };
 
-  return (
-    visible && (
-      <div
-        className={classMerge(defaultContainerStyles)}
-        onClick={handleBackgroundClick}
-      >
+    return (
+      visible && (
         <div
-          className={classMerge(defaultDialogStyles, styles["dialog-in"])}
-          ref={dialogRef}
-          onClick={handleModalClick}
+          className={classMerge(defaultContainerStyles)}
+          onClick={handleBackgroundClick}
         >
-          {headless ? (
-            <UserUI />
-          ) : (
-            <div className="max-w-[600px]">
-              <CustomHeader onHide={closeDialog} />
-              <DefaultContent content={content} />
-              <CustomFooter />
-            </div>
-          )}
+          <div
+            className={classMerge(defaultDialogStyles, styles["dialog-in"])}
+            ref={dialogRef}
+            onClick={handleModalClick}
+          >
+            {headless ? (
+              <UserUI />
+            ) : (
+              <div className="max-w-[600px]">
+                <CustomHeader onHide={closeDialog} />
+                <DefaultContent content={content} />
+                <CustomFooter />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    )
-  );
-};
+      )
+    );
+  }
+);
 
 export default Dialog;
