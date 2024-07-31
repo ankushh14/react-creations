@@ -13,3 +13,11 @@ export * from "./Loaders";
 import Dialog from "./Dialog";
 
 export { Dialog };
+
+import Card from "./Card";
+
+export { Card };
+
+import Carousel from "./Carousel";
+
+export { Carousel };

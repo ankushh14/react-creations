@@ -36,7 +36,7 @@ const Carousel = React.memo(
         value = defaultValues,
         changeIntervalInMilli = 500,
         orderedPages = false,
-        orientation = "horizontal",
+        orientation = "vertical",
         ...args
       },
       ref
@@ -49,19 +49,23 @@ const Carousel = React.memo(
       const [page, setPage] = React.useState(0);
 
       const createCarouselItems = React.useCallback(() => {
-        const carouselItems = [...value].splice(index, numOfVisible);
-        const createdElements = carouselItems?.map((item) => {
-          const carouselItemId = generateRandomUUID();
-          return (
-            <CarouselItem
-              item={item}
-              itemId={carouselItemId}
-              template={childTemplate}
-              key={carouselItemId}
-            />
-          );
-        });
-        return createdElements;
+        if (value.length > 0) {
+          const carouselItems = [...value].splice(index, numOfVisible);
+          const createdElements = carouselItems?.map((item) => {
+            const carouselItemId = generateRandomUUID();
+            return (
+              <CarouselItem
+                item={item}
+                itemId={carouselItemId}
+                template={childTemplate}
+                key={carouselItemId}
+              />
+            );
+          });
+          return createdElements;
+        } else {
+          return [];
+        }
       }, [value, numOfVisible, childTemplate, index]);
 
       React.useEffect(() => {
@@ -128,7 +132,7 @@ const Carousel = React.memo(
             className={`w-full flex ${orientation === "horizontal" ? "flex-row" : "flex-col"}`}
             onKeyDown={(e) => e.stopPropagation()}
           >
-            <div className="h-auto p-4 flex justify-center items-center">
+            <div className="h-auto p-2 md:p-4 flex justify-center items-center">
               <button
                 className="w-fit rounded-full p-1 text-2xl text-blue-400 focus:outline-blue-500 bg-blue-100"
                 onClick={moveLeftHandle}
@@ -142,12 +146,12 @@ const Carousel = React.memo(
               </button>
             </div>
             <div
-              className={`w-full flex justify-center items-center p-5 ${orientation === "horizontal" ? "flex-row space-x-6" : "flex-col space-y-6"}`}
+              className={`w-full flex justify-center items-center p-2 md:p-5 ${orientation === "horizontal" ? "flex-row space-x-6" : "flex-col space-y-6"}`}
               aria-live={`${autoChange ? "polite" : "off"}`}
             >
-              {value.length && carouselItems}
+              {carouselItems}
             </div>
-            <div className="h-auto p-4 flex justify-center items-center">
+            <div className="h-auto p-2 md:p-4 flex justify-center items-center">
               <button
                 className="w-fit rounded-full p-1 text-2xl text-blue-400 focus:outline-blue-500 bg-blue-100"
                 onClick={moveRightHandle}
@@ -162,7 +166,7 @@ const Carousel = React.memo(
             </div>
           </div>
           <div
-            className={`w-full flex flex-row justify-center items-center space-x-4 py-3`}
+            className={`w-full flex flex-row flex-wrap justify-center items-center p-3`}
             role="tablist"
             onKeyDown={(e) => e.stopPropagation()}
           >
@@ -210,7 +214,7 @@ const UnorderedPageIndicator = React.memo(
     return (
       <>
         <span
-          className={`w-3 h-3 bg-transparent rounded-full cursor-pointer hover:border-blue-500 focus:outline-blue-500 ${index === page ? "border-blue-500 border-4" : "border-slate-500 border"}`}
+          className={`w-3 h-3 m-2 bg-transparent rounded-full cursor-pointer border border-blue-500 hover:border-blue-600 focus:outline-blue-600 ${index === page ? "border-blue-600 border-4" : ""}`}
           onClick={onClickHandler}
           tabIndex={0}
           role="button"
@@ -239,7 +243,7 @@ const OrderedPageIndicator = React.memo(
     return (
       <>
         <span
-          className={`w-fit hover:bg-blue-200 border border-[#80ccfba4] focus:outline-blue-500 cursor-pointer rounded-full px-2 text-xs py-1 ${index === page ? "bg-blue-200" : "bg-transparent"}`}
+          className={`w-auto m-2 text-center hover:bg-blue-200 border border-[#80ccfba4] focus:outline-blue-500 cursor-pointer rounded-full px-2 py-1 text-xs ${index === page ? "bg-blue-200" : "bg-transparent"}`}
           onClick={onClickHandler}
           tabIndex={0}
           role="button"
