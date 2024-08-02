@@ -33,6 +33,8 @@ const Toast = forwardRef<HTMLDivElement, Toaster>(
       <div
         className={classMerge(defaultToastList, positionOptions[position])}
         ref={ref}
+        role="alert"
+        aria-live="assertive"
       >
         {toasts.length > 0 &&
           toasts.map((value) => {
