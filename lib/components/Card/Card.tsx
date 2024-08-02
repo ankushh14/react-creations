@@ -48,12 +48,14 @@ const Card = React.memo(
           <div className="w-full p-4">
             <div className="w-full flex flex-col pb-4">
               <div className="w-full">
-                <h1 id="card-title" className="text-2xl font-bold">
+                <h1 id="card-title" className="text-2xl font-bold" tabIndex={0}>
                   {title}
                 </h1>
               </div>
               <div className="w-full">
-                <h1 className="text-base font-semibold">{subtitle}</h1>
+                <h1 className="text-base font-semibold" tabIndex={0}>
+                  {subtitle}
+                </h1>
               </div>
             </div>
             {children}
