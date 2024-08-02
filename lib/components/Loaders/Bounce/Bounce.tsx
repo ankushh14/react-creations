@@ -7,13 +7,13 @@ import {
 } from "./constants";
 import { BounceProps } from "./types";
 
-const Bounce = React.memo(({ color, size = "base" }: BounceProps) => {
+const Bounce = React.memo(({ color, size = "base", ...args }: BounceProps) => {
   const commonStyles = {
     backgroundColor: color,
   };
 
   return (
-    <div className={classMerge(defaultContainerStyles)}>
+    <div className={classMerge(defaultContainerStyles)} {...args}>
       <span
         className={classMerge(defaultBounceStyles, sizeOptions[size])}
         style={commonStyles}
