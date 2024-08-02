@@ -4,9 +4,13 @@ import { DefaultContentProps, DefaultHeaderProps } from "./types";
 export const DefaultHeader = ({ onHide }: DefaultHeaderProps) => {
   return (
     <div className="w-full p-2 flex justify-end items-center">
-      <div className="w-fit" onClick={onHide}>
+      <button
+        className="w-fit bg-transparent border-none rounded-md"
+        onClick={onHide}
+        tabIndex={0}
+      >
         <CloseIcon />
-      </div>
+      </button>
     </div>
   );
 };
